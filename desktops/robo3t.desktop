@@ -1,0 +1,13 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+Name=Robo3T
+Icon=/home/q/Apps/robo3t/icons/robo3t.png
+Path=/home/q/Apps/robo3t
+Exec=/home/q/Apps/robo3t/bin/robo3t
+StartupNotify=true
+StartupWMClass=
+X-UnityGenerated=false
+Categories=GNOME;GTK;DBMS;
+Terminal=false
