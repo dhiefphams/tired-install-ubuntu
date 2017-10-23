@@ -50,10 +50,6 @@ echo 'Install Skype'
 curl https://repo.skype.com/data/SKYPE-GPG-KEY | sudo apt-key add -
 echo "deb [arch=amd64] https://repo.skype.com/deb stable main" | sudo tee /etc/apt/sources.list.d/skypeforlinux.list
 
-# Plank
-echo 'Install Docky'
-sudo add-apt-repository ppa:ricotz/docky -y
-
 # Numix Theme
 echo 'Install Numix Theme'
 sudo add-apt-repository ppa:numix/ppa -y
@@ -105,7 +101,6 @@ wget -q -O - http://archive.getdeb.net/getdeb-archive.key | sudo apt-key add -
 
 # Flat icons
 sudo add-apt-repository ppa:noobslab/icons -y
-sudo add-apt-repository ppa:noobslab/apps -y
 
 # Virtualbox
 echo 'Install virtualbox'
@@ -120,9 +115,9 @@ sudo apt-key adv --keyserver pgp.mit.edu --recv-key AD319E0F7CFFA38B4D9F6E55CE3F
 # Install all
 echo 'Install all package'
 sudo apt-get update && sudo apt-get install -y zsh cuda code sublime-text nodejs yarn \
- oracle-java8-installer google-chrome-stable neovim git skypeforlinux plank numix-gtk-theme \
+ oracle-java8-installer google-chrome-stable neovim git skypeforlinux numix-gtk-theme \
  numix-icon-theme albert docker-ce psensor pomodoro-indicator ubuntu-tweak \
- gnome-tweak-tool gimp ultra-flat-icons plank-themer virtualbox vagrant
+ gnome-tweak-tool gimp ultra-flat-icons virtualbox vagrant
 
 # Fix docker 
 echo 'Fix Docker error'
