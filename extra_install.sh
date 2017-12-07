@@ -3,13 +3,13 @@
 mkdir -p ~/Apps
 
 echo 'Install rust'
-# curl https://sh.rustup.rs -sSf | sh
+curl https://sh.rustup.rs -sSf | sh
 
 echo 'Install Android studio'
-# wget https://dl.google.com/dl/android/studio/ide-zips/3.0.0.17/android-studio-ide-171.4402976-linux.zip -O /tmp/studio.zip && unzip /tmp/studio.zip -d ~/Apps && rm -rf /tmp/studio.zip
+wget https://dl.google.com/dl/android/studio/ide-zips/3.0.1.0/android-studio-ide-171.4443003-linux.zip -O /tmp/studio.zip && unzip /tmp/studio.zip -d ~/Apps && rm -rf /tmp/studio.zip
 
 echo 'Install IntelliJ'
-# wget https://download.jetbrains.com/idea/ideaIC-2017.2.5-no-jdk.tar.gz -O /tmp/idea.tar.gz && tar -vxf /tmp/idea.tar.gz -C ~/Apps && rm -rf /tmp/idea.tar.gz
+wget https://download-cf.jetbrains.com/idea/ideaIC-2017.3-no-jdk.tar.gz -O /tmp/idea.tar.gz && tar -vxf /tmp/idea.tar.gz -C ~/Apps && rm -rf /tmp/idea.tar.gz
 
 echo 'Install Robo3T'
 ROBOT=/tmp/robo3t.tar.gz

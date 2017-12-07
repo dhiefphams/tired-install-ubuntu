@@ -3,10 +3,10 @@ echo 'Install basic package'
 sudo apt-get update && sudo apt-get install curl wget python3-dev cryptsetup -y
 
 # Cuda
-echo 'Install cuda and nvidia'
-curl 'http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1704/x86_64/cuda-repo-ubuntu1704_9.0.176-1_amd64.deb' -o /tmp/cuda.deb && sudo dpkg -i /tmp/cuda.deb && rm -rf /tmp/cuda.deb
+# echo 'Install cuda and nvidia'
+# curl 'http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1704/x86_64/cuda-repo-ubuntu1704_9.0.176-1_amd64.deb' -o /tmp/cuda.deb && sudo dpkg -i /tmp/cuda.deb && rm -rf /tmp/cuda.deb
 
-sudo apt-key adv --fetch-keys 'http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1704/x86_64/7fa2af80.pub'
+# sudo apt-key adv --fetch-keys 'http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1704/x86_64/7fa2af80.pub'
 
 # VsCode
 echo 'Install VsCode'
@@ -20,7 +20,7 @@ echo "deb https://download.sublimetext.com/ apt/dev/" | sudo tee /etc/apt/source
 
 # nodejs
 echo 'Install NodeJS'
-curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
 
 # yarn
 echo 'Install Yarn'
@@ -34,7 +34,7 @@ sudo add-apt-repository ppa:webupd8team/java -y
 # Chrome
 echo 'Install Chrome'
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - \
-&& echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> sudo tee /etc/apt/sources.list.d/google.list
+&& echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> sudo tee /etc/apt/sources.list.d/google-chrome.list
 
 # NVIM
 echo 'Install NeoVIM'
@@ -48,15 +48,11 @@ sudo add-apt-repository ppa:git-core/ppa -y
 # Skype for linux
 echo 'Install Skype'
 curl https://repo.skype.com/data/SKYPE-GPG-KEY | sudo apt-key add -
-echo "deb [arch=amd64] https://repo.skype.com/deb stable main" | sudo tee /etc/apt/sources.list.d/skypeforlinux.list
+echo "deb [arch=amd64] https://repo.skype.com/deb stable main" | sudo tee /etc/apt/sources.list.d/skype-stable.list
 
 # Numix Theme
 echo 'Install Numix Theme'
 sudo add-apt-repository ppa:numix/ppa -y
-
-# albert
-echo 'Install Albert search'
-sudo add-apt-repository ppa:nilarimogard/webupd8 -y
 
 # Docker
 echo 'Install docker'
@@ -79,7 +75,9 @@ sudo add-apt-repository ppa:atareao/atareao -y
 
 ## Golang
 echo 'Install golang'
-curl -s https://storage.googleapis.com/golang/go1.9.1.linux-amd64.tar.gz | tar vxf - -C /usr/local
+GO_VERSION=1.9.2
+GOFILE=/tmp/golang.tar.gz
+wget https://storage.googleapis.com/golang/go${GO_VERSION}.linux-amd64.tar.gz -O $GOFILE && sudo tar -vxf $GOFILE -C /usr/local && rm -rf $GOFILE
 
 # Inkspace
 echo 'Install inspakce'
@@ -93,11 +91,6 @@ sudo add-apt-repository ppa:otto-kesselgulasch/gimp -y
 echo 'Install vlc'
 echo 'deb http://ppa.launchpad.net/videolan/stable-daily/ubuntu yakkety main' | sudo tee /etc/apt/sources.list.d/vlc.list
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3361E59FF5029E6B90A9A80D09589874801DF724
-
-# Ubuntu tweak
-echo 'Install ubuntu tweak'
-echo "deb http://archive.getdeb.net/ubuntu xenial-getdeb apps" | sudo tee /etc/apt/sources.list.d/getdeb.list
-wget -q -O - http://archive.getdeb.net/getdeb-archive.key | sudo apt-key add -
 
 # Flat icons
 sudo add-apt-repository ppa:noobslab/icons -y
@@ -114,9 +107,9 @@ sudo apt-key adv --keyserver pgp.mit.edu --recv-key AD319E0F7CFFA38B4D9F6E55CE3F
 
 # Install all
 echo 'Install all package'
-sudo apt-get update && sudo apt-get install -y zsh cuda code sublime-text nodejs yarn \
+sudo apt-get update && sudo apt-get install -y zsh code sublime-text nodejs yarn \
  oracle-java8-installer google-chrome-stable neovim git skypeforlinux numix-gtk-theme \
- numix-icon-theme albert docker-ce psensor pomodoro-indicator ubuntu-tweak \
+ numix-icon-theme docker-ce psensor pomodoro-indicator \
  gnome-tweak-tool gimp ultra-flat-icons virtualbox vagrant
 
 # Fix docker 
@@ -128,7 +121,7 @@ echo 'Install on my zsh'
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 # Node Version manager
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.5/install.sh | bash
+curl -o- https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 echo 'export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"' >> ~/.zshrc
 
