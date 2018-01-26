@@ -130,3 +130,12 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 curl -o- https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 echo 'export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"' >> ~/.profile
+
+# copy style and desktop icon
+echo "Copy style and desktop icons"
+mkdir -p ~/.themes/Q/gnome-shell
+cp css/* ~/.themes/Q/gnome-shell/
+cp desktops/* ~/.local/share/applications/
+
+echo 'Install fonts'
+sudo apt-get install -y  ttf-mscorefonts-installer fonts-inconsolata -y
