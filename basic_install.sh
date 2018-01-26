@@ -2,11 +2,17 @@
 echo 'Install basic package'
 sudo apt-get update && sudo apt-get install curl wget python3-dev cryptsetup -y
 
-# Cuda
-# echo 'Install cuda and nvidia'
-# curl 'http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1704/x86_64/cuda-repo-ubuntu1704_9.0.176-1_amd64.deb' -o /tmp/cuda.deb && sudo dpkg -i /tmp/cuda.deb && rm -rf /tmp/cuda.deb
-
-# sudo apt-key adv --fetch-keys 'http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1704/x86_64/7fa2af80.pub'
+EXTRACT_INSTALL=""
+if [$CUDA]; then
+    # Cuda
+    CUDA_VERSION=9.1.85
+    # echo 'Install cuda and nvidia'
+    curl 'http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1704/x86_64/cuda-repo-ubuntu1704_${CUDA_VERSION}-1_amd64.deb' -o /tmp/cuda.deb
+    sudo dpkg -i /tmp/cuda.deb
+    rm -rf /tmp/cuda.deb
+    sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1704/x86_64/7fa2af80.pub
+    EXTRACT_INSTALL=${EXTRACT_INSTALL} cuda
+fi
 
 # VsCode
 echo 'Install VsCode'
@@ -16,7 +22,7 @@ echo 'deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main' 
 # Sublime
 echo 'Install Sublime'
 wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
-echo "deb https://download.sublimetext.com/ apt/dev/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
+echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
 
 # nodejs
 echo 'Install NodeJS'
@@ -59,7 +65,7 @@ echo 'Install docker'
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo add-apt-repository \
    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-   zesty \
+   $(lsb_release -cs) \
    stable"
 
 # Psensor
@@ -110,7 +116,7 @@ echo 'Install all package'
 sudo apt-get update && sudo apt-get install -y zsh code sublime-text nodejs yarn \
  oracle-java8-installer google-chrome-stable neovim git skypeforlinux numix-gtk-theme \
  numix-icon-theme docker-ce psensor pomodoro-indicator \
- gnome-tweak-tool gimp ultra-flat-icons virtualbox vagrant
+ gnome-tweak-tool gimp ultra-flat-icons virtualbox vagrant ${EXTRACT_INSTALL}
 
 # Fix docker 
 echo 'Fix Docker error'
@@ -123,5 +129,4 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 # Node Version manager
 curl -o- https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 echo 'export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"' >> ~/.zshrc
-
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"' >> ~/.profile
